@@ -14,51 +14,51 @@ services:
     volumes:
       - mysql-user-data:/var/lib/mysql
 
-  config-service:
-    build:
-      context: ./services/config-service
-      dockerfile: Dockerfile
-    container_name: config-service
-    ports:
-      - "8888:8888"
-    networks:
-      - spring-microservices-network
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8888/health" ]
-      interval: 5s
-      timeout: 10s
-      retries: 3
-
-  discovery-service:
-    build:
-      context: ./services/discovery-service
-      dockerfile: Dockerfile
-    container_name: discovery-service
-    ports:
-      - "8761:8761"
-    networks:
-      - spring-microservices-network
-    depends_on:
-      - config-service
-
-
-  user-service:
-    build:
-      context: ./services/user-service
-      dockerfile: Dockerfile
-    container_name: user-service
-    ports:
-      - "8090:8090"
-    networks:
-      - spring-microservices-network
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-user:3306/users_db?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
-    depends_on:
-      - mysql-user
-      - config-service
-      - discovery-service
+#  config-service:
+#    build:
+#      context: ./services/config-service
+#      dockerfile: Dockerfile
+#    container_name: config-service
+#    ports:
+#      - "8888:8888"
+#    networks:
+#      - spring-microservices-network
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:8888/health" ]
+#      interval: 5s
+#      timeout: 10s
+#      retries: 3
+#
+#  discovery-service:
+#    build:
+#      context: ./services/discovery-service
+#      dockerfile: Dockerfile
+#    container_name: discovery-service
+#    ports:
+#      - "8761:8761"
+#    networks:
+#      - spring-microservices-network
+#    depends_on:
+#      - config-service
+#
+#
+#  user-service:
+#    build:
+#      context: ./services/user-service
+#      dockerfile: Dockerfile
+#    container_name: user-service
+#    ports:
+#      - "8090:8090"
+#    networks:
+#      - spring-microservices-network
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-user:3306/users_db?createDatabaseIfNotExist=true
+#      SPRING_DATASOURCE_USERNAME: user
+#      SPRING_DATASOURCE_PASSWORD: password
+#    depends_on:
+#      - mysql-user
+#      - config-service
+#      - discovery-service
 
 networks:
   spring-microservices-network:
