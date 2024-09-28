@@ -1,6 +1,7 @@
 package com.warrioracademy.user.entities;
 
 
+import com.warrioracademy.user.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -20,6 +22,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Validated
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,16 +48,17 @@ public class User implements Serializable {
     @NotNull(message = "User dateOfBirth is required")
     private LocalDate dateOfBirth;
 
-    // Numéro de téléphone avec validation du format selon le pays
-    @Pattern(regexp = "\\+[0-9]{1,3}[0-9]{9,12}", message = "Invalid phone number format")
-    private String phoneNumber;
-
+    @Pattern(regexp = "\\+[0-9]{1,3}", message = "Invalid international code")
     private String countryCode; // Code international
+
+    // Numéro de téléphone avec validation du format selon le pays
+    @Pattern(regexp = "[0-9]{8,12}", message = "Invalid phone number format")
+    private String phoneNumber;
 
     // Relation One-to-Many avec Address
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Address> addresses = new HashSet<>();
 
-
-    private String roles;
+    @Enumerated(EnumType.STRING)
+    private Role roles;
 }

@@ -28,9 +28,9 @@ public class UserServiceImpl implements UserService {
         logger.info("Creating user with email: {}", userDto.getEmail());
         // Mapper le DTO vers l'entité User
         User user = userMapper.toEntity(userDto);
+        logger.error("user that will be added to db: "+user.toString());
         // Sauvegarder l'utilisateur en base de données
         User savedUser = userRepository.save(user);
-        user.setPassword("0000");
         return new MessageResponse("Utilisateur créé avec succès", userMapper.toDto(savedUser));
     }
 
@@ -51,10 +51,9 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé avec ID: " + id));
 
         // Mettre à jour les informations de l'utilisateur
-        User updatedUser = userMapper.toEntity(userDto);
-        updatedUser.setId(existingUser.getId());
+        userMapper.updateUserFromDto(userDto, existingUser);
 
-        User savedUser = userRepository.save(updatedUser);
+        User savedUser = userRepository.save(existingUser);
         return new MessageResponse("Utilisateur mis à jour avec succès", userMapper.toDto(savedUser));
     }
 

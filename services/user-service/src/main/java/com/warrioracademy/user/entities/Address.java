@@ -22,6 +22,7 @@ import org.springframework.validation.annotation.Validated;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotNull(message = "Street is required")
     private String street;

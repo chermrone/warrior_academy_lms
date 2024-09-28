@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/user")
 @Tag(name = "Utilisateur", description = "Les APIs des utilisateurs")
 public class UserController {
 
