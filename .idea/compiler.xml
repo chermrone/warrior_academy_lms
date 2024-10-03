@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="discovery-service" />
         <module name="config-service" />
-        <module name="gatewayservice" />
       </profile>
       <profile name="Annotation profile for user-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -23,12 +22,15 @@
         <module name="user-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gateway-service" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="config-service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
-      <module name="gatewayservice" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

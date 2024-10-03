@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.warriorAcademy</groupId>
-	<artifactId>gatewayservice</artifactId>
+	<artifactId>gateway-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>gatewayservice</name>
 	<description>gatewayservice</description>

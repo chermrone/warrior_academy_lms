@@ -1,4 +1,4 @@
-package com.warrioracademy.gatewayservice;
+package com.warrioracademy.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,10 +8,10 @@ import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 @LoadBalancerClient("loadProxy")
 @EnableDiscoveryClient
 @SpringBootApplication
-public class GatewayserviceApplication {
+public class GatewayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GatewayserviceApplication.class, args);
+		SpringApplication.run(GatewayApplication.class, args);
 	}
 
 }

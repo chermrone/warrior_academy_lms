@@ -1,6 +1,7 @@
 package com.warrioracademy.user.entities;
 
 
+import com.warrioracademy.user.config.AuditorAwareProvider;
 import com.warrioracademy.user.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -10,10 +11,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.validation.annotation.Validated;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +28,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class User implements Serializable {
+
+public class User extends AuditorAwareProvider implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -61,4 +67,18 @@ public class User implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Role roles;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createDate;
+    @Column(insertable = false)
+    @LastModifiedDate
+    private LocalDateTime latModified;
+
+    @CreatedBy
+    @Column(nullable = false, updatable = false)
+    private String createdBy;
+    @Column(insertable = false)
+    @LastModifiedDate
+    private String lastModifiedBy;
 }

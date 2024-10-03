@@ -1,4 +1,4 @@
-package com.warrioracademy.gatewayservice.security;
+package com.warrioracademy.gateway.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
